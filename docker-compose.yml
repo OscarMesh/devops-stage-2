@@ -48,9 +48,16 @@ services:
       - "81:81" # Management UI
       - "80:80" # HTTP port
       - "443:443" # HTTPS port
+    environment:
+      DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+      - backend
+      - frontend
+      - adminer
 
 volumes:
   db-data:
